@@ -311,10 +311,11 @@ Reading 1-2 files?                    → OK to do directly
    - Don't wait for user to ask "is it done?"
    - Report: "Verifying SCAR's work..." then results
 
-3. **Every 2 hours while SCAR is working:**
-   - Check issue for new comments
+3. **Every 2 minutes while SCAR is working:**
+   - Check issue for new comments (especially "Implementation complete")
    - Check worktree for file changes
    - Report progress to user proactively
+   - CRITICAL: Don't let SCAR sit idle for hours after completing work
 
 4. **When context reaches 60% (120K/200K tokens):**
    - Alert user: "Context at 60%, will handoff at 80%"
