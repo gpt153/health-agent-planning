@@ -215,16 +215,61 @@ epics:
       - 60  # Implement API rate limiting
       - 61  # Add type hints to critical functions
     blocked_by: null
-    blocks: []
+    blocks: ["007"]  # Phase 2 depends on Phase 1
     description: "Phase 1 quick wins from comprehensive code review: Replace 82 print statements with logging, fix 5 bare except clauses, add 4 missing database indexes, implement API rate limiting, add type hints to critical functions. Total estimated time: 8 hours."
+
+  - id: "007"
+    title: "Phase 2: High-Priority Refactoring"
+    status: draft
+    priority: high
+    complexity: 2  # Medium complexity - refactoring tasks
+    created: 2026-01-15
+    started: null
+    completed: null
+    issues:
+      - 66  # Simplify complex tracking functions (6 functions >50 complexity)
+      - 67  # Break complex gamification functions into smaller units
+      - 68  # Refactor complex memory retrieval functions
+      - 69  # Add comprehensive error handling to photo analysis
+      - 70  # Consolidate duplicate database query patterns
+      - 71  # Add validation layer for agent tool inputs
+      - 72  # Implement database connection pooling
+      - 73  # Add request/response logging middleware
+      - 74  # Implement proper transaction boundaries
+      - 75  # Add unit tests for critical business logic
+    blocked_by: "006"  # Depends on Phase 1 quick wins
+    blocks: ["008"]  # Phase 3 depends on Phase 2
+    description: "Phase 2 high-priority refactoring from comprehensive code review: Simplify complex functions (>50 complexity), break down complex gamification and memory functions, add comprehensive error handling, consolidate duplicate patterns, implement validation layers, add connection pooling, improve logging, fix transaction boundaries, and add unit tests. Total estimated time: 30 hours."
+
+  - id: "008"
+    title: "Phase 3: Long-Term Architecture"
+    status: draft
+    priority: medium
+    complexity: 3  # Large complexity - architectural improvements
+    created: 2026-01-15
+    started: null
+    completed: null
+    issues:
+      - 77  # Implement async database operations
+      - 78  # Add caching layer for expensive AI operations
+      - 79  # Implement proper dependency injection system
+      - 80  # Add comprehensive integration tests
+      - 81  # Implement event sourcing for user actions
+      - 82  # Add metrics collection and monitoring
+      - 83  # Implement feature flags system
+      - 84  # Add API versioning and backward compatibility
+    blocked_by: "007"  # Depends on Phase 2 refactoring
+    blocks: []
+    description: "Phase 3 long-term architectural improvements: Implement async database operations, add caching for AI, implement dependency injection, add integration tests, implement event sourcing, add metrics/monitoring, implement feature flags, and add API versioning. Total estimated time: 112 hours."
 
 # Progress Metrics
 metrics:
-  total_epics: 6
+  total_epics: 8  # 6 original + Phase 2 + Phase 3
   completed_epics: 0
-  total_issues: 6  # Issues #55, #57-#61 active
+  total_issues: 24  # 1 (gamification) + 5 (Phase 1) + 10 (Phase 2) + 8 (Phase 3)
   completed_issues: 0
   in_progress_issues: 6  # Issues #55, #57-#61 in progress
+  draft_issues: 18  # 10 (Phase 2) + 8 (Phase 3)
   blocked_issues: 1  # Epic 005 blocked by Epic 001
   implementation_progress: 80  # 4 of 5 phases complete
   test_coverage: 38  # 38 test files
@@ -284,6 +329,47 @@ notes: |
     * #59: Add 4 missing database indexes (2h)
     * #60: Implement API rate limiting (2h)
     * #61: Add type hints to critical functions (1h)
+
+  PHASE 2 HIGH-PRIORITY REFACTORING (2026-01-15 19:30):
+  - Epic 007 created: Phase 2 refactoring tasks
+  - 10 issues planned (#66-#75) - 30 hours estimated
+  - Status: Draft (waiting for Phase 1 completion)
+  - Blocked by: Epic 006 (Phase 1 Quick Wins)
+  - Focus: Function complexity, error handling, database patterns, testing
+  - Issues:
+    * #66: Simplify complex tracking functions (4h)
+    * #67: Break complex gamification functions (3h)
+    * #68: Refactor complex memory functions (3h)
+    * #69: Add error handling to photo analysis (2h)
+    * #70: Consolidate duplicate DB patterns (4h)
+    * #71: Add validation layer for agent tools (3h)
+    * #72: Implement DB connection pooling (2h)
+    * #73: Add request/response logging (2h)
+    * #74: Implement transaction boundaries (3h)
+    * #75: Add unit tests for business logic (4h)
+
+  PHASE 3 LONG-TERM ARCHITECTURE (2026-01-15 19:30):
+  - Epic 008 created: Long-term architectural improvements
+  - 8 issues planned (#77-#84) - 112 hours estimated
+  - Status: Draft (waiting for Phase 2 completion)
+  - Blocked by: Epic 007 (Phase 2 High-Priority Refactoring)
+  - Focus: Async operations, caching, DI, testing, event sourcing, monitoring
+  - Issues:
+    * #77: Implement async database operations (20h)
+    * #78: Add caching layer for AI operations (16h)
+    * #79: Implement dependency injection (16h)
+    * #80: Add integration tests (16h)
+    * #81: Implement event sourcing (20h)
+    * #82: Add metrics/monitoring (8h)
+    * #83: Implement feature flags (8h)
+    * #84: Add API versioning (8h)
+
+  TOTAL PLANNING COVERAGE:
+  - Phase 1: 5 issues, 8 hours (active)
+  - Phase 2: 10 issues, 30 hours (draft)
+  - Phase 3: 8 issues, 112 hours (draft)
+  - Total: 24 issues, 150 hours across 3 improvement phases
+  - Comprehensive code review provides clear roadmap to production-grade quality
 
   BMAD ADOPTION GOALS:
   - Use epic-based instruction pattern for future SCAR tasks
