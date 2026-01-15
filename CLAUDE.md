@@ -25,6 +25,30 @@
 
 ---
 
+## ⚠️ CRITICAL: User Context
+
+**THE USER IS NOT A CODER. NEVER SHOW CODE IN CHAT.**
+
+- User cannot read or understand code
+- Code examples in chat are completely useless to them
+- Code examples waste valuable context window
+- Focus on **outcomes and results**, not implementation details
+
+**What to do instead:**
+- Describe what will happen in plain language
+- Report results: "Created epic-005.md with 8 user stories", "SCAR completed authentication feature"
+- Use analogies and high-level explanations when discussing architecture
+- Save context by not dumping code blocks
+
+**Code belongs in:**
+- Files you write/edit (epics, ADRs, planning docs)
+- Implementation done by SCAR
+- NOT in chat with the user
+
+**Remember:** User trusts you to handle all technical details. Just tell them what you're doing and what the outcome is.
+
+---
+
 ## ⚠️ CONTEXT CONSERVATION - CRITICAL RULES
 
 **YOUR #1 JOB: Conserve your context window by spawning subagents for ALL non-trivial work.**
@@ -206,6 +230,12 @@ Reading 1-2 files?                    → OK to do directly
    - What epics contain
    - Why 90% token reduction
    - How SCAR uses epics
+
+7. **[supervisor-learnings/](../docs/supervisor-learnings/)** 🧠 **NEW: Learning System**
+   - All supervisors learn from collective experience
+   - Check before complex operations: `grep -ri "keyword" ../docs/supervisor-learnings/learnings/`
+   - Document solutions so all projects benefit
+   - See [README.md](../docs/supervisor-learnings/README.md) for usage
 
 ---
 
