@@ -65,6 +65,46 @@ phases:
         priority: high
         created_at: 2026-01-15T18:45:00+01:00
         url: "https://github.com/gpt153/health-agent/issues/55"
+      - number: 57
+        title: "Replace print statements with proper logging"
+        status: in_progress
+        epic: "006"
+        assignee: scar
+        priority: high
+        created_at: 2026-01-15T19:00:00+01:00
+        url: "https://github.com/gpt153/health-agent/issues/57"
+      - number: 58
+        title: "Fix bare except clauses with specific exception handling"
+        status: in_progress
+        epic: "006"
+        assignee: scar
+        priority: high
+        created_at: 2026-01-15T19:00:00+01:00
+        url: "https://github.com/gpt153/health-agent/issues/58"
+      - number: 59
+        title: "Add missing database indexes for performance"
+        status: in_progress
+        epic: "006"
+        assignee: scar
+        priority: high
+        created_at: 2026-01-15T19:00:00+01:00
+        url: "https://github.com/gpt153/health-agent/issues/59"
+      - number: 60
+        title: "Implement API rate limiting"
+        status: in_progress
+        epic: "006"
+        assignee: scar
+        priority: high
+        created_at: 2026-01-15T19:00:00+01:00
+        url: "https://github.com/gpt153/health-agent/issues/60"
+      - number: 61
+        title: "Add type hints to critical functions"
+        status: in_progress
+        epic: "006"
+        assignee: scar
+        priority: high
+        created_at: 2026-01-15T19:00:00+01:00
+        url: "https://github.com/gpt153/health-agent/issues/61"
     notes: |
       Production system deployed and running.
       Phases 1-4 complete (10,000+ LOC, 38 tests).
@@ -75,10 +115,21 @@ phases:
       - Epic 001: Gamification Application Code Debugging
       - Status: SCAR working on diagnosis and fix
 
+      PHASE 1 CODE QUALITY (2026-01-15 19:00):
+      - Issues #57-#61: Code quality quick wins (SCAR acknowledged all)
+      - Epic 006: Phase 1 Code Quality Quick Wins
+      - Status: SCAR working on all 5 issues in parallel
+      - Focus: Logging, error handling, performance, security, type safety
+
 # Current Work (BMAD Planning Initialization)
-current_epic: "001"
+current_epic: "006"
 active_issues:
   - 55  # Gamification application code debugging
+  - 57  # Replace print statements with logging
+  - 58  # Fix bare except clauses
+  - 59  # Add missing database indexes
+  - 60  # Implement API rate limiting
+  - 61  # Add type hints to critical functions
 completed_issues: []
 
 # Retroactive Epic Planning (To Be Created)
@@ -149,19 +200,38 @@ epics:
     blocks: []
     description: "Add detailed debug logging to gamification functions to identify failure points. Add user-facing error messages when gamification fails. Add startup health check for database connection verification. Focus on application code debugging, not database migrations."
 
+  - id: "006"
+    title: "Phase 1: Code Quality Quick Wins"
+    status: active
+    priority: high
+    complexity: 1  # Small improvements - focused quick wins
+    created: 2026-01-15
+    started: 2026-01-15T19:00:00+01:00
+    completed: null
+    issues:
+      - 57  # Replace print statements with logging
+      - 58  # Fix bare except clauses
+      - 59  # Add missing database indexes
+      - 60  # Implement API rate limiting
+      - 61  # Add type hints to critical functions
+    blocked_by: null
+    blocks: []
+    description: "Phase 1 quick wins from comprehensive code review: Replace 82 print statements with logging, fix 5 bare except clauses, add 4 missing database indexes, implement API rate limiting, add type hints to critical functions. Total estimated time: 8 hours."
+
 # Progress Metrics
 metrics:
-  total_epics: 5
+  total_epics: 6
   completed_epics: 0
-  total_issues: 1  # Issue #55 active
+  total_issues: 6  # Issues #55, #57-#61 active
   completed_issues: 0
-  in_progress_issues: 1  # Issue #55 in progress
+  in_progress_issues: 6  # Issues #55, #57-#61 in progress
   blocked_issues: 1  # Epic 005 blocked by Epic 001
   implementation_progress: 80  # 4 of 5 phases complete
   test_coverage: 38  # 38 test files
   database_tables: 26
   production_status: "deployed_and_operational"
   gamification_status: "under_active_debugging"  # Issue #55: SCAR debugging application code
+  code_quality_status: "phase_1_quick_wins_in_progress"  # Issues #57-#61: SCAR working on 5 improvements
 
 # Notes and Context
 notes: |
@@ -200,6 +270,20 @@ notes: |
   - Epic 001 now active with Issue #55 linked
   - Status: SCAR investigating application code layer
   - Expected: Identify root cause and implement fix
+
+  PHASE 1 CODE QUALITY QUICK WINS (2026-01-15 19:00):
+  - Comprehensive codebase review completed
+  - Review document: .bmad/CODEBASE_REVIEW.md
+  - 143 total issues found (2 critical, 13 high, 48 medium, 80 low)
+  - Phase 1 Quick Wins: 5 issues created (#57-#61) - 8 hours estimated
+  - SCAR acknowledged all 5 issues - working in parallel
+  - Focus: Logging, error handling, performance, security, type safety
+  - Issues:
+    * #57: Replace 82 print statements with logging (2h)
+    * #58: Fix 5 bare except clauses (1h)
+    * #59: Add 4 missing database indexes (2h)
+    * #60: Implement API rate limiting (2h)
+    * #61: Add type hints to critical functions (1h)
 
   BMAD ADOPTION GOALS:
   - Use epic-based instruction pattern for future SCAR tasks
