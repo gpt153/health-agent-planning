@@ -86,8 +86,8 @@ epics:
     completed: null
     issues: []
     blocked_by: null
-    blocks: []
-    description: "Apply 10 missing migrations to production database (sleep quiz, user habits)"
+    blocks: ["005"]  # Gamification depends on this
+    description: "Apply 10 missing migrations to production database (sleep quiz, user habits, gamification tables: user_xp, xp_transactions, user_streaks, achievements, user_achievements)"
 
   - id: "002"
     title: "Agent Module Refactoring"
@@ -128,18 +128,32 @@ epics:
     blocks: []
     description: "Document key architecture decisions (PydanticAI, multi-agent, memory system)"
 
+  - id: "005"
+    title: "Gamification Error Handling Improvements"
+    status: draft
+    priority: high
+    complexity: 0  # Simple bug fix
+    created: 2026-01-15
+    started: null
+    completed: null
+    issues: []
+    blocked_by: "001"  # Needs database tables first
+    blocks: []
+    description: "Add user-facing error messages when gamification fails + startup health check for table verification"
+
 # Progress Metrics
 metrics:
-  total_epics: 4
+  total_epics: 5
   completed_epics: 0
   total_issues: 0
   completed_issues: 0
   in_progress_issues: 0
-  blocked_issues: 0
+  blocked_issues: 1  # Epic 005 blocked by Epic 001
   implementation_progress: 80  # 4 of 5 phases complete
   test_coverage: 38  # 38 test files
   database_tables: 26
   production_status: "deployed_with_pending_migrations"
+  gamification_status: "implemented_but_non_functional"  # Tables missing on production
 
 # Notes and Context
 notes: |
@@ -156,10 +170,18 @@ notes: |
   - 📝 BMAD documentation (epics, ADRs, PRDs) to be created
 
   IMMEDIATE PRIORITIES:
-  1. Sync production database (10 migrations)
-  2. Create retroactive ADRs for key decisions
-  3. Plan Phase 5 using BMAD methodology
-  4. Refactor agent module for maintainability
+  1. Sync production database (10 migrations) - CRITICAL for gamification
+  2. Fix gamification error handling (user-facing messages)
+  3. Create retroactive ADRs for key decisions
+  4. Plan Phase 5 using BMAD methodology
+  5. Refactor agent module for maintainability
+
+  GAMIFICATION ISSUE IDENTIFIED (2026-01-15):
+  - Root cause: Production database missing gamification tables (migrations not applied)
+  - Secondary issue: Silent failure with empty error messages
+  - Code is complete and correct, integration points are working
+  - Fix: Epic 001 (migrations) + Epic 005 (error messages)
+  - See: .bmad/GAMIFICATION_ISSUE_ANALYSIS.md for full analysis
 
   BMAD ADOPTION GOALS:
   - Use epic-based instruction pattern for future SCAR tasks
