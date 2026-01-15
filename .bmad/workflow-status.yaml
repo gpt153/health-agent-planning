@@ -77,17 +77,17 @@ completed_issues: []
 # Retroactive Epic Planning (To Be Created)
 epics:
   - id: "001"
-    title: "Production Database Migration Sync"
+    title: "Gamification Application Code Debugging"
     status: active
     priority: high
-    complexity: 1  # Medium complexity
+    complexity: 2  # Medium complexity - debugging required
     created: 2026-01-15
     started: null
     completed: null
     issues: []
     blocked_by: null
-    blocks: ["005"]  # Gamification depends on this
-    description: "Apply 10 missing migrations to production database (sleep quiz, user habits, gamification tables: user_xp, xp_transactions, user_streaks, achievements, user_achievements)"
+    blocks: ["005"]  # Error handling depends on finding root cause
+    description: "Debug gamification application layer to find why features don't work despite functional database. Database verification shows tables exist with active data (3 users, 28 XP transactions). Problem is in Python/Telegram bot code layer (database connection, query execution, transaction commits, or UI display)."
 
   - id: "002"
     title: "Agent Module Refactoring"
@@ -132,14 +132,14 @@ epics:
     title: "Gamification Error Handling Improvements"
     status: draft
     priority: high
-    complexity: 0  # Simple bug fix
+    complexity: 1  # Small feature - enhanced logging + UI messages
     created: 2026-01-15
     started: null
     completed: null
     issues: []
-    blocked_by: "001"  # Needs database tables first
+    blocked_by: "001"  # Needs root cause identified first
     blocks: []
-    description: "Add user-facing error messages when gamification fails + startup health check for table verification"
+    description: "Add detailed debug logging to gamification functions to identify failure points. Add user-facing error messages when gamification fails. Add startup health check for database connection verification. Focus on application code debugging, not database migrations."
 
 # Progress Metrics
 metrics:
@@ -152,8 +152,8 @@ metrics:
   implementation_progress: 80  # 4 of 5 phases complete
   test_coverage: 38  # 38 test files
   database_tables: 26
-  production_status: "deployed_with_pending_migrations"
-  gamification_status: "implemented_but_non_functional"  # Tables missing on production
+  production_status: "deployed_and_operational"
+  gamification_status: "database_operational_app_layer_issue"  # Tables exist with data, but app code fails
 
 # Notes and Context
 notes: |
@@ -165,23 +165,26 @@ notes: |
   CURRENT STATE:
   - ✅ Production bot deployed on Telegram
   - ✅ Phases 1-4 complete (core bot, multi-agent nutrition, gamification)
-  - ⚠️ Production database missing 10 recent migrations
+  - ✅ Production database fully operational (26 tables, 3 users with XP data, 28 transactions)
   - ⏳ Phase 5 (social features) not started
   - 📝 BMAD documentation (epics, ADRs, PRDs) to be created
 
   IMMEDIATE PRIORITIES:
-  1. Sync production database (10 migrations) - CRITICAL for gamification
-  2. Fix gamification error handling (user-facing messages)
+  1. Debug gamification application code (database works, app layer fails) - CRITICAL
+  2. Fix gamification error handling (enhanced logging + user-facing messages)
   3. Create retroactive ADRs for key decisions
   4. Plan Phase 5 using BMAD methodology
   5. Refactor agent module for maintainability
 
-  GAMIFICATION ISSUE IDENTIFIED (2026-01-15):
-  - Root cause: Production database missing gamification tables (migrations not applied)
-  - Secondary issue: Silent failure with empty error messages
-  - Code is complete and correct, integration points are working
-  - Fix: Epic 001 (migrations) + Epic 005 (error messages)
-  - See: .bmad/GAMIFICATION_ISSUE_ANALYSIS.md for full analysis
+  GAMIFICATION ISSUE UPDATED (2026-01-15 18:30):
+  - REVISED ROOT CAUSE: Application code layer issue, NOT database issue
+  - Database verification: Tables exist with active data (3 users, 28 XP transactions)
+  - Original diagnosis WRONG: Database tables were already applied
+  - New hypothesis: Python/Telegram bot code fails to interact with database correctly
+  - Possible causes: DB connection config, query execution, transaction commits, UI display logic
+  - Secondary issue: Silent failure with empty error messages (still true)
+  - Fix: Epic 001 (debug app code) + Epic 005 (enhanced logging + error messages)
+  - See: .bmad/GAMIFICATION_ISSUE_ANALYSIS.md for full analysis (revised version 2.0)
 
   BMAD ADOPTION GOALS:
   - Use epic-based instruction pattern for future SCAR tasks
