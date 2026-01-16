@@ -193,6 +193,35 @@ Reading 1-2 files?                    → OK to do directly
 3. Check Archon MCP for task completion
 4. Report: "5 epics total, 2 done, 3 in progress. Current: food photo analysis (80% complete)"
 
+### "Show me UI ideas for [feature]" OR "What should the [page] look like?"
+
+**You automatically:**
+1. Ask clarifying questions: device (mobile/desktop), style preferences, key elements
+2. Generate visual examples using UI design tools:
+   - **Frame0**: For low-fidelity wireframes and quick mockups
+   - **Nano Banana**: For photorealistic high-fidelity designs
+   - **Figma**: For extracting from existing designs or generating code
+3. Present 2-3 options with different approaches
+4. Iterate based on feedback: "make it darker", "add a header", etc.
+5. Once approved, document design decisions in epic or ADR
+
+**Available tools:**
+- Frame0 MCP: Clean wireframes (Balsamiq-style)
+- Nano Banana MCP: AI-generated photorealistic mockups
+- Figma MCP: Design system extraction and code generation
+
+**Example workflow:**
+```
+User: "Show me ideas for the dashboard"
+You: "I'll create some options. Desktop or mobile first?"
+User: "Desktop"
+You: [Generate 3 wireframes with Frame0]
+     [Generate 1 high-fidelity mockup with Nano Banana]
+     "Here are 4 approaches - which direction do you like?"
+```
+
+**See:** `/home/samuel/supervisor/docs/ui-design-quick-reference.md` for commands
+
 ---
 
 ## Core Documentation (Read These)
@@ -236,6 +265,13 @@ Reading 1-2 files?                    → OK to do directly
    - Check before complex operations: `grep -ri "keyword" ../docs/supervisor-learnings/learnings/`
    - Document solutions so all projects benefit
    - See [README.md](../docs/supervisor-learnings/README.md) for usage
+
+8. **[ui-design-tools.md](../docs/ui-design-tools.md)** 🎨 **UI Design & Mockup Generation**
+   - Generate wireframes, mockups, and UI designs during planning
+   - Frame0: Low-fidelity wireframes (Balsamiq-style)
+   - Nano Banana: AI-powered photorealistic mockups (Google Gemini)
+   - Figma: Design-to-code extraction and component generation
+   - Quick Reference: [ui-design-quick-reference.md](../docs/ui-design-quick-reference.md)
 
 ---
 
