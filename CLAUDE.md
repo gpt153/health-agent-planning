@@ -252,9 +252,15 @@ Reading 1-2 files?                    → OK to do directly
 3. If Level 1-4 (feature): Spawn meta-orchestrator subagent
 4. Subagent creates: epic + ADRs + feature request
 5. Commit artifacts to planning repo
-6. Create GitHub issue with epic URL + @scar mention
-7. Wait 20s, verify SCAR acknowledgment
-8. Report to user: "✅ Epic created, SCAR acknowledged, monitoring progress"
+6. **Create GitHub issues with parallel optimization:**
+   - Read epic's Dependencies section
+   - Identify issues with no dependencies (can run in parallel)
+   - Create ALL independent issues immediately (with 2s delays for GitHub rate limits)
+   - Tag @scar on all of them
+   - SCAR will work on up to 10 simultaneously
+   - For dependent issues: Wait for prerequisites to complete before creating
+7. Wait 20s, verify SCAR acknowledgment on all issues
+8. Report to user: "✅ Epic created, X issues posted (Y parallel, Z sequential), SCAR acknowledged"
 
 **User never needs to say:** "spawn subagent", "create epic", "verify SCAR" - you do it all automatically.
 
@@ -266,10 +272,10 @@ Reading 1-2 files?                    → OK to do directly
 3. Verify git commits in last 10 minutes: `cd worktree && git log --since="10 minutes ago"`
 4. Check for blocking patterns: "awaiting approval", "plan ready", "waiting for"
 5. If no commits in 10 min: Check if SCAR is stuck or blocked
-6. Report ACTUAL status WITH TIMESTAMP in format [HH:MM Stockholm]:
-   - "[18:45 Stockholm] SCAR is actively working. Last commit: 5 minutes ago."
-   - "[18:45 Stockholm] SCAR blocked waiting for approval"
-   - "[18:45 Stockholm] SCAR completed work, needs verification"
+6. Report ACTUAL status WITH TIMESTAMP in format [HH:MM CET]:
+   - "[18:45 CET] SCAR is actively working. Last commit: 5 minutes ago."
+   - "[18:45 CET] SCAR blocked waiting for approval"
+   - "[18:45 CET] SCAR completed work, needs verification"
 
 ### "Verify issue #123" OR "Is the work good?"
 
@@ -455,8 +461,8 @@ You: [Generate 3 wireframes with Frame0]
    - Check actual code for mocks/placeholders
    - Run actual test command (python -m pytest), not shortcuts
    - Verify specific errors from issue are fixed
-   - Report WITH TIMESTAMP: "[HH:MM Stockholm] Verifying SCAR's work..." then ACTUAL results
-   - Example: "[18:47 Stockholm] Verification complete: APPROVED" or "[18:47 Stockholm] Verification complete: REJECTED - 3 issues found"
+   - Report WITH TIMESTAMP: "[HH:MM CET] Verifying SCAR's work..." then ACTUAL results
+   - Example: "[18:47 CET] Verification complete: APPROVED" or "[18:47 CET] Verification complete: REJECTED - 3 issues found"
 
 3. **Every 2 minutes while SCAR is working:**
    - Check issue for new comments (especially "Implementation complete")
@@ -464,8 +470,8 @@ You: [Generate 3 wireframes with Frame0]
    - Verify git commits in last 10 minutes (not just file existence)
    - Look for: "awaiting approval", "waiting for", "plan ready" in output
    - If no commits in 10 min, check if SCAR is blocked or stuck
-   - Report progress to user proactively WITH TIMESTAMP: "[HH:MM Stockholm] Status message"
-   - Example: "[18:45 Stockholm] SCAR is working on food analysis. Last commit: 3 minutes ago."
+   - Report progress to user proactively WITH TIMESTAMP: "[HH:MM CET] Status message"
+   - Example: "[18:45 CET] SCAR is working on food analysis. Last commit: 3 minutes ago."
    - CRITICAL: Don't let SCAR sit idle for hours after completing work or being blocked
 
 4. **When context reaches 60% (120K/200K tokens):**
@@ -570,7 +576,7 @@ Need to instruct SCAR?
 7. **NO MOCK/PLACEHOLDER ACCEPTANCE** - Unless in PRD (mandatory)
 8. **VALIDATE BEFORE MERGE** - `/verify-scar-phase` is mandatory
 9. **BE PROACTIVE** - Check progress, report status, alert issues
-10. **ALWAYS INCLUDE TIMESTAMPS IN STATUS UPDATES** - User needs to know when info is from (format: [HH:MM Stockholm])
+10. **ALWAYS INCLUDE TIMESTAMPS IN STATUS UPDATES** - User needs to know when info is from (format: [HH:MM CET])
 11. **EPIC FILES ARE SELF-CONTAINED** - All context in one place
 12. **USE MoSCoW** - Prevent scope creep
 13. **DOCUMENT DECISIONS** - ADRs capture WHY, not just WHAT
@@ -684,7 +690,7 @@ You succeed when:
 4. ✅ Check for mocks/placeholders (grep TODO, FIXME, print.*debug)
 5. ✅ Verify git commits in last 10 minutes
 6. ✅ Check specific errors from issue are fixed
-7. ✅ Report WITH TIMESTAMP: "[HH:MM Stockholm] Verification complete: APPROVED/REJECTED"
+7. ✅ Report WITH TIMESTAMP: "[HH:MM CET] Verification complete: APPROVED/REJECTED"
 
 **When monitoring SCAR:**
 1. ⚠️ DO NOT just check if process exists
@@ -692,7 +698,7 @@ You succeed when:
 3. ✅ Look for: "awaiting approval", "plan ready", "waiting for"
 4. ✅ Verify commits in last 10 minutes
 5. ✅ If no activity, check if SCAR is blocked
-6. ✅ Report WITH TIMESTAMP: "[HH:MM Stockholm] Status message"
+6. ✅ Report WITH TIMESTAMP: "[HH:MM CET] Status message"
 
 **Red flags:**
 - Overly detailed summaries with ✅ checkmarks
