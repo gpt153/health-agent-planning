@@ -235,7 +235,7 @@ phases:
       - Focus: Logging, error handling, performance, security, type safety
 
 # Current Work (BMAD Planning Initialization)
-current_epic: "007"
+current_epic: "007"  # Phase 2 refactoring active, Epic 009 (custom tracking) ready for implementation
 active_issues:
   - 55  # Gamification application code debugging
   - 67  # Break complex gamification functions into smaller units
@@ -388,18 +388,31 @@ epics:
     blocks: []
     description: "Phase 3 long-term architectural improvements: Implement async database operations, add caching for AI, implement dependency injection, add integration tests, implement event sourcing, add metrics/monitoring, implement feature flags, and add API versioning. Total estimated time: 112 hours."
 
+  - id: "009"
+    title: "Custom Tracking System - Dynamic Health Metrics"
+    status: not_started
+    priority: high
+    complexity: 2  # Medium complexity - new feature with JSONB
+    created: 2026-01-16
+    started: null
+    completed: null
+    issues: []  # To be created
+    blocked_by: null
+    blocks: []
+    description: "Enable users to track custom health metrics (period cycles, symptoms, energy, medications, etc.) using PostgreSQL JSONB for flexible schema-per-tracker. Agent integration for contextual advice based on custom data patterns. See ADR-006 and epic-006-custom-tracking-system.md. Estimated time: 25 hours (7 phases)."
+
 # Progress Metrics
 metrics:
-  total_epics: 8  # 6 original + Phase 2 + Phase 3
+  total_epics: 9  # 6 original + Phase 2 + Phase 3 + Custom Tracking
   completed_epics: 1  # Epic 006 completed
   total_issues: 27  # 1 (gamification) + 5 (Phase 1) + 10 (Phase 2) + 8 (Phase 3) + 3 (user issues)
   completed_issues: 9  # Issues #57-#61, #66, #88-#90 completed
   in_progress_issues: 10  # Issues #55, #67-#75 in progress
-  draft_issues: 8  # 8 (Phase 3)
+  draft_issues: 8  # 8 (Phase 3) + 0 (Custom tracking - not created yet)
   blocked_issues: 1  # Epic 005 blocked by Epic 001
   implementation_progress: 80  # 4 of 5 phases complete
   test_coverage: 38  # 38 test files
-  database_tables: 26
+  database_tables: 26  # Will be 28 after custom tracking (tracker_definitions, tracker_entries)
   production_status: "deployed_and_operational"
   gamification_status: "under_active_debugging"  # Issue #55: SCAR debugging application code
   code_quality_status: "phase_2_refactoring_active"  # Epic 006 complete, Epic 007 active
@@ -548,6 +561,12 @@ decisions:
     adr: "adr/004-gamification-system-design.md"  # To be created
     impact: medium
     rationale: "XP/streaks/achievements combat tracking fatigue, reward consistency"
+
+  - date: 2026-01-16
+    title: "Dynamic Custom Tracking with JSONB Storage"
+    adr: "adr/006-dynamic-custom-tracking.md"
+    impact: high
+    rationale: "PostgreSQL JSONB enables infinite flexibility (users define trackers) with strong typing (Pydantic validation). Agent reads schema metadata to understand custom data. Solves period/symptom/medication tracking without rigid tables."
 
 # Review Schedule
 reviews:
